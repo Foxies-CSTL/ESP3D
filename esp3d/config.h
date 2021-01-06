@@ -31,7 +31,7 @@
 #define ESP_MANUFACTURER_NAME "Espressif Systems"
 #define ESP_MANUFACTURER_URL "http://espressif.com"
 //default name if no mac address is valid
-#define ESP_DEFAULT_NAME "MYESP"
+#define ESP_DEFAULT_NAME "MKS"
 //if commented name will follow mac address 3 last digits
 //like ESP_XXXXXX (eg:ESP_028E41) to avoid overlap if several ESP3D
 #define ESP_HOST_NAME ESP_DEFAULT_NAME
@@ -367,13 +367,13 @@ typedef enum {
 
 //default values
 #define DEFAULT_WIFI_MODE           AP_MODE
-const char DEFAULT_AP_SSID []  PROGMEM =        "ESP3D";
-const char DEFAULT_AP_PASSWORD [] PROGMEM = "12345678";
-const char DEFAULT_STA_SSID []  PROGMEM =       "ESP3D";
-const char DEFAULT_STA_PASSWORD [] PROGMEM =    "12345678";
+const char DEFAULT_AP_SSID []  PROGMEM =        "AP-FLSUN";
+const char DEFAULT_AP_PASSWORD [] PROGMEM = "makerbase";
+const char DEFAULT_STA_SSID []  PROGMEM =       "STA-FLSUN";
+const char DEFAULT_STA_PASSWORD [] PROGMEM =    "makerbase";
 const byte DEFAULT_STA_IP_MODE  =               DHCP_MODE;
 const byte DEFAULT_AP_IP_MODE =                 STATIC_IP_MODE;
-const byte DEFAULT_IP_VALUE[]   =           {192, 168, 0, 1};
+const byte DEFAULT_IP_VALUE[]   =           {192, 168, 4, 1};
 const byte DEFAULT_MASK_VALUE[]  =          {255, 255, 255, 0};
 #define DEFAULT_GATEWAY_VALUE               DEFAULT_IP_VALUE
 const long DEFAULT_BAUD_RATE =          115200;
