@@ -86,9 +86,6 @@
 #if FILESYSTEM_FEATURE == ESP_FAT_FILESYSTEM && defined( ARDUINO_ARCH_ESP8266)
 #error Fat FS is not available in ESP8266
 #endif
-#if FILESYSTEM_FEATURE == ESP_LITTLEFS_FILESYSTEM && defined( ARDUINO_ARCH_ESP32)
-#error LittleFS is not yet available in ESP32, use ESP_SPIFFS_FILESYSTEM instead
-#endif
 #if FILESYSTEM_FEATURE == ESP_SPIFFS_FILESYSTEM && defined( ARDUINO_ARCH_ESP8266)
 #error ESP_SPIFFS_FILESYSTEM is no more available in ESP8266, use ESP_LITTLEFS_FILESYSTEM instead
 #endif
@@ -133,6 +130,27 @@
 #if defined(FTP_FEATURE) && !defined(SD_DEVICE)
 #if FTP_FEATURE == FS_SD
 #error FTP_FEATURE == FS_SD is not available because SD_DEVICE is not enabled
+#endif
+#endif
+
+/**************************
+ * WebDav
+ * ***********************/
+#if defined(WEBDAV_FEATURE) && !defined(GLOBAL_FILESYSTEM_FEATURE)
+#if WEBDAV_FEATURE == FS_ROOT
+#error WEBDAV_FEATURE == FS_ROOT is not available because GLOBAL_FILESYSTEM_FEATURE is not enabled
+#endif
+#endif
+
+#if defined(WEBDAV_FEATURE) && !defined(FILESYSTEM_FEATURE)
+#if WEBDAV_FEATURE == FS_FLASH
+#error WEBDAV_FEATURE == FS_FLASH is not available because FILESYSTEM_FEATURE is not enabled
+#endif
+#endif
+
+#if defined(WEBDAV_FEATURE) && !defined(SD_DEVICE)
+#if WEBDAV_FEATURE == FS_SD
+#error WEBDAV_FEATURE == FS_SD is not available because SD_DEVICE is not enabled
 #endif
 #endif
 

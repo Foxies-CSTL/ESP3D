@@ -118,6 +118,7 @@ bool WiFiConfig::ConnectSTA2AP()
     uint8_t dot = 0;
     wl_status_t status = WiFi.status();
     ESP3DOutput output(ESP_ALL_CLIENTS);
+    log_esp3d("Connecting");
 #if COMMUNICATION_PROTOCOL != MKS_SERIAL
     if (!Settings_ESP3D::isVerboseBoot()) {
         output.printMSG("Connecting");
@@ -142,6 +143,7 @@ bool WiFiConfig::ConnectSTA2AP()
             }
             msg_out+=".";
             msg= msg_out;
+            log_esp3d("...");
             dot++;
             break;
         }
@@ -163,6 +165,7 @@ bool WiFiConfig::ConnectSTA2AP()
  */
 bool WiFiConfig::StartSTA()
 {
+    log_esp3d("StartSTA");
 #if defined (ARDUINO_ARCH_ESP32)
     esp_wifi_start();
 #endif //ARDUINO_ARCH_ESP32
@@ -191,8 +194,9 @@ bool WiFiConfig::StartSTA()
         int32_t IP = Settings_ESP3D::read_IP(ESP_STA_IP_VALUE);
         int32_t GW = Settings_ESP3D::read_IP(ESP_STA_GATEWAY_VALUE);
         int32_t MK = Settings_ESP3D::read_IP(ESP_STA_MASK_VALUE);
-        IPAddress ip(IP), mask(MK), gateway(GW);
-        WiFi.config(ip, gateway,mask);
+        int32_t DNS = Settings_ESP3D::read_IP(ESP_STA_DNS_VALUE);
+        IPAddress ip(IP), mask(MK), gateway(GW), dns(DNS);
+        WiFi.config(ip, gateway,mask,dns);
     }
     ESP3DOutput output(ESP_ALL_CLIENTS);
     if (Settings_ESP3D::isVerboseBoot()) {
@@ -232,6 +236,7 @@ bool WiFiConfig::StartAP()
     if((WiFi.getMode() == WIFI_AP) || (WiFi.getMode() == WIFI_AP_STA)) {
         WiFi.softAPdisconnect();
     }
+    WiFi.enableAP (true);
     WiFi.enableSTA (false);
     WiFi.mode(WIFI_AP);
     //Set Sleep Mode to none
@@ -248,7 +253,7 @@ bool WiFiConfig::StartAP()
     IPAddress ip(IP);
     IPAddress mask(DEFAULT_AP_MASK_VALUE);
     //Set static IP
-
+    log_esp3d("Use: %s / %s / %s", ip.toString().c_str(),ip.toString().c_str(),mask.toString().c_str());
     if (!WiFi.softAPConfig(ip, ip, mask)) {
         output.printERROR("Set IP to AP failed");
     } else {
@@ -263,6 +268,7 @@ bool WiFiConfig::StartAP()
             stmp +=" is started not protected by passord";
         }
         output.printMSG(stmp.c_str());
+        log_esp3d("%s",stmp.c_str());
         //must be done after starting AP not before
 #if defined (ARDUINO_ARCH_ESP32)
         WiFi.setSleep(false);
@@ -271,6 +277,7 @@ bool WiFiConfig::StartAP()
         return true;
     } else {
         output.printERROR("Starting AP failed");
+        log_esp3d("Starting AP failed");
         return false;
     }
 }
@@ -287,17 +294,21 @@ bool WiFiConfig::begin()
 {
     bool res = false;
     end();
+    log_esp3d("Starting Wifi Config");
     if (Settings_ESP3D::isVerboseBoot()) {
         ESP3DOutput output(ESP_ALL_CLIENTS);
         output.printMSG("Starting WiFi");
     }
     int8_t wifiMode =Settings_ESP3D::read_byte(ESP_RADIO_MODE);
     if (wifiMode == ESP_WIFI_AP) {
+        log_esp3d("Starting AP mode");
         res = StartAP();
     } else if (wifiMode == ESP_WIFI_STA) {
+        log_esp3d("Starting STA");
         res = StartSTA();
         //AP is backup mode
         if(!res) {
+            log_esp3d("Starting AP mode in safe mode");
             res = StartAP();
         }
     }
@@ -365,7 +376,7 @@ const char* WiFiConfig::getPHYModeString (uint8_t wifimode)
 {
 #ifdef ARDUINO_ARCH_ESP32
     uint8_t PhyMode;
-    esp_wifi_get_protocol ((wifimode == WIFI_STA)?ESP_IF_WIFI_STA:ESP_IF_WIFI_AP, &PhyMode);
+    esp_wifi_get_protocol ((wifi_interface_t)((wifimode == WIFI_STA)?ESP_IF_WIFI_STA:ESP_IF_WIFI_AP), &PhyMode);
 #endif //ARDUINO_ARCH_ESP32
 #ifdef ARDUINO_ARCH_ESP8266
     (void)wifimode;
@@ -386,7 +397,7 @@ bool WiFiConfig::is_AP_visible()
 {
 #ifdef ARDUINO_ARCH_ESP32
     wifi_config_t conf;
-    esp_wifi_get_config (ESP_IF_WIFI_AP, &conf);
+    esp_wifi_get_config ((wifi_interface_t)ESP_IF_WIFI_AP, &conf);
     return (conf.ap.ssid_hidden == 0);
 #endif //ARDUINO_ARCH_ESP32
 #ifdef ARDUINO_ARCH_ESP8266
@@ -401,7 +412,7 @@ const char * WiFiConfig::AP_SSID()
     static String ssid;
 #ifdef ARDUINO_ARCH_ESP32
     wifi_config_t conf;
-    esp_wifi_get_config (ESP_IF_WIFI_AP, &conf);
+    esp_wifi_get_config ((wifi_interface_t)ESP_IF_WIFI_AP, &conf);
     ssid = (const char*) conf.ap.ssid;
 #endif //ARDUINO_ARCH_ESP32
 #ifdef ARDUINO_ARCH_ESP8266
@@ -417,7 +428,7 @@ const char * WiFiConfig::AP_Auth_String()
     uint8_t mode = 0;
 #ifdef ARDUINO_ARCH_ESP32
     wifi_config_t conf;
-    esp_wifi_get_config (ESP_IF_WIFI_AP, &conf);
+    esp_wifi_get_config ((wifi_interface_t)ESP_IF_WIFI_AP, &conf);
     mode = conf.ap.authmode;
 
 #endif //ARDUINO_ARCH_ESP32

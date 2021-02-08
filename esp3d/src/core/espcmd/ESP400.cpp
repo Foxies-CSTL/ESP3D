@@ -123,6 +123,13 @@ bool Commands::ESP400(const char* cmd_params, level_authenticate_type auth_type,
     output->print ("\",\"T\":\"A\",\"V\":\"");
     output->print (Settings_ESP3D::read_IP_String(ESP_STA_MASK_VALUE));
     output->print ("\",\"H\":\"msk\"}");
+
+    //STA static DNS
+    output->print (",{\"F\":\"network/sta\",\"P\":\"");
+    output->print (ESP_STA_DNS_VALUE);
+    output->print ("\",\"T\":\"A\",\"V\":\"");
+    output->print (Settings_ESP3D::read_IP_String(ESP_STA_DNS_VALUE));
+    output->print ("\",\"H\":\"DNS\"}");
 #endif  //WIFI_FEATURE || ETH_FEATURE
 #if defined(WIFI_FEATURE)
     //AP SSID network/ap
@@ -262,7 +269,25 @@ bool Commands::ESP400(const char* cmd_params, level_authenticate_type auth_type,
     output->print (Settings_ESP3D::get_min_int32_value(ESP_WEBSOCKET_PORT));
     output->print ("\"}");
 #endif //WS_DATA_FEATURE
+#ifdef WEBDAV_FEATURE
+    //WebDav On service
+    output->print (",{\"F\":\"service/webdavp\",\"P\":\"");
+    output->print (ESP_WEBDAV_ON);
+    output->print ("\",\"T\":\"B\",\"V\":\"");
+    output->print (Settings_ESP3D::read_byte(ESP_WEBDAV_ON));
+    output->print ("\",\"H\":\"enable\",\"O\":[{\"no\":\"0\"},{\"yes\":\"1\"}]}");
 
+    //WebDav Port
+    output->print (",{\"F\":\"service/webdavp\",\"P\":\"");
+    output->print (ESP_WEBDAV_PORT);
+    output->print ("\",\"T\":\"I\",\"V\":\"");
+    output->print (Settings_ESP3D::read_uint32(ESP_WEBDAV_PORT));
+    output->print ("\",\"H\":\"port\",\"S\":\"");
+    output->print (Settings_ESP3D::get_max_int32_value(ESP_WEBDAV_PORT));
+    output->print ("\",\"M\":\"");
+    output->print (Settings_ESP3D::get_min_int32_value(ESP_WEBDAV_PORT));
+    output->print ("\"}");
+#endif //WEBDAV_FEATURE
 #ifdef FTP_FEATURE
     //FTP On service/ftp
     output->print (",{\"F\":\"service/ftp\",\"P\":\"");

@@ -81,12 +81,14 @@ const uint16_t ServstringKeysPos[] = {
 const char * IPKeysVal[] = {"STA_IP",
                             "STA_GW",
                             "STA_MSK",
+                            "STA_DNS",
                             "AP_IP"
                            } ;
 
 const uint16_t IPKeysPos[] = {ESP_STA_IP_VALUE,
                               ESP_STA_MASK_VALUE,
                               ESP_STA_GATEWAY_VALUE,
+                              ESP_STA_DNS_VALUE
                               ESP_AP_IP_VALUE
                              } ;
 
@@ -95,6 +97,7 @@ const char * ServintKeysVal[] = {
     "TELNET_Port",
     "SENSOR_INTERVAL",
     "WebSocket_Port",
+    "WebDav_Port",
     "FTP_Control_Port",
     "FTP_Active_Port ",
     "FTP_Passive_Port"
@@ -105,6 +108,7 @@ const uint16_t ServintKeysPos[] = {
     ESP_TELNET_PORT,
     ESP_SENSOR_INTERVAL,
     ESP_WEBSOCKET_PORT,
+    ESP_WEBDAV_PORT,
     ESP_FTP_CTRL_PORT,
     ESP_FTP_DATA_ACTIVE_PORT,
     ESP_FTP_DATA_PASSIVE_PORT
@@ -121,6 +125,7 @@ const uint16_t SysintKeysPos[] = {ESP_BAUD_RATE,
 const char * ServboolKeysVal[] = {"HTTP_active",
                                   "TELNET_active",
                                   "WebSocket_active",
+                                  "WebDav_active",
                                   "Time_DST",
                                   "CHECK_FOR_UPDATE",
                                   "Active_buzzer",
@@ -130,6 +135,7 @@ const char * ServboolKeysVal[] = {"HTTP_active",
 const uint16_t ServboolKeysPos[] = {ESP_HTTP_ON,
                                     ESP_TELNET_ON,
                                     ESP_WEBSOCKET_ON,
+                                    ESP_WEBDAV_ON,
                                     ESP_TIME_IS_DST,
                                     ESP_SD_CHECK_UPDATE_AT_BOOT,
                                     ESP_BUZZER,
