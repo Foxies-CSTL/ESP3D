@@ -58,7 +58,7 @@
 #define NOTIFICATION_FEATURE
 
 //MKS TFT WIFI support see Wiki for wiring
-//#define MKS_TFT_FEATURE
+#define MKS_TFT_FEATURE
 
 //MDNS_FEATURE: this feature allow  type the name defined
 //in web browser by default: http:\\esp8266.local and connect
@@ -175,7 +175,7 @@
 #endif
 
 //number of clients allowed to use data port at once
-#define MAX_SRV_CLIENTS 1
+#define MAX_SRV_CLIENTS 2
 
 #ifdef ARDUINO_ARCH_ESP32
 #include "FS.h"
@@ -369,7 +369,7 @@ typedef enum {
 #define DEFAULT_WIFI_MODE           AP_MODE
 const char DEFAULT_AP_SSID []  PROGMEM =        "AP-FLSUN";
 const char DEFAULT_AP_PASSWORD [] PROGMEM = "makerbase";
-const char DEFAULT_STA_SSID []  PROGMEM =       "STA-FLSUN";
+const char DEFAULT_STA_SSID []  PROGMEM =       "ST-FLSUN";
 const char DEFAULT_STA_PASSWORD [] PROGMEM =    "makerbase";
 const byte DEFAULT_STA_IP_MODE  =               DHCP_MODE;
 const byte DEFAULT_AP_IP_MODE =                 STATIC_IP_MODE;
