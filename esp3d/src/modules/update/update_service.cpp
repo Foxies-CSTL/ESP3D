@@ -86,9 +86,9 @@ const char * IPKeysVal[] = {"STA_IP",
                            } ;
 
 const uint16_t IPKeysPos[] = {ESP_STA_IP_VALUE,
-                              ESP_STA_MASK_VALUE,
                               ESP_STA_GATEWAY_VALUE,
-                              ESP_STA_DNS_VALUE
+                              ESP_STA_MASK_VALUE,
+                              ESP_STA_DNS_VALUE,
                               ESP_AP_IP_VALUE
                              } ;
 
@@ -148,7 +148,8 @@ const char * SysboolKeysVal[] = {"Active_Printer_LCD",
                                  "Active_WebSocket",
                                  "Active_Telnet",
                                  "Active_BT",
-                                 "Boot_verbose"
+                                 "Boot_verbose",
+                                 "Secure_serial"
                                 } ;
 
 const uint16_t SysboolKeysPos[] = {ESP_PRINTER_LCD_FLAG,
@@ -157,7 +158,8 @@ const uint16_t SysboolKeysPos[] = {ESP_PRINTER_LCD_FLAG,
                                    ESP_WEBSOCKET_FLAG,
                                    ESP_TELNET_FLAG,
                                    ESP_BT_FLAG,
-                                   ESP_VERBOSE_BOOT
+                                   ESP_VERBOSE_BOOT,
+                                   ESP_SECURE_SERIAL
                                   } ;
 
 const char * NetbyteKeysVal[] = {
