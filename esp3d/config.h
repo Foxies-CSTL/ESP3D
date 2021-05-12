@@ -68,7 +68,7 @@
 #define SSDP_FEATURE
 
 //NETBIOS_FEATURE: this feature is a discovery protocol, supported on Windows out of the box
-//#define NETBIOS_FEATURE
+#define NETBIOS_FEATURE
 
 //CAPTIVE_PORTAL_FEATURE: In SoftAP redirect all unknow call to main page
 #define CAPTIVE_PORTAL_FEATURE
@@ -318,15 +318,15 @@ typedef enum {
 #define EP_STA_PASSWORD         34   //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
 #define EP_STA_IP_MODE          99   //1 byte = flag
 #define EP_STA_IP_VALUE         100  //4  bytes xxx.xxx.xxx.xxx
-#define EP_STA_MASK_VALUE           104  //4  bytes xxx.xxx.xxx.xxx
-#define EP_STA_GATEWAY_VALUE            108  //4  bytes xxx.xxx.xxx.xxx
+#define EP_STA_MASK_VALUE       104  //4  bytes xxx.xxx.xxx.xxx
+#define EP_STA_GATEWAY_VALUE    108  //4  bytes xxx.xxx.xxx.xxx
 #define EP_BAUD_RATE            112  //4  bytes = int
 #define EP_STA_PHY_MODE         116  //1 byte = flag
 #define EP_SLEEP_MODE           117  //1 byte = flag
-#define EP_CHANNEL          118 //1 byte = flag
+#define EP_CHANNEL              118 //1 byte = flag
 #define EP_AUTH_TYPE            119 //1 byte = flag
 #define EP_SSID_VISIBLE         120 //1 byte = flag
-#define EP_WEB_PORT         121 //4  bytes = int
+#define EP_WEB_PORT             121 //4  bytes = int
 #define EP_DATA_PORT            125 //4  bytes = int
 #define EP_OUTPUT_FLAG          129 //1  bytes = flag
 #define EP_HOSTNAME             130//33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
@@ -336,32 +336,32 @@ typedef enum {
 #define EP_FREE_BYTE1           171//1  bytes = flag
 #define EP_FREE_INT3            172//4  bytes = int
 #define EP_ADMIN_PWD            176//21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
-#define EP_USER_PWD         197//21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
+#define EP_USER_PWD             197//21  bytes 20+1 = string  ; warning does not support multibyte char like chinese
 #define EP_AP_SSID              218    //33 bytes 32+1 = string  ; warning does not support multibyte char like chinese
 #define EP_AP_PASSWORD          251   //65 bytes 64 +1 = string ;warning does not support multibyte char like chinese
 #define EP_AP_IP_VALUE          316  //4  bytes xxx.xxx.xxx.xxx
-#define EP_AP_MASK_VALUE            320  //4  bytes xxx.xxx.xxx.xxx
-#define EP_AP_GATEWAY_VALUE         324  //4  bytes xxx.xxx.xxx.xxx
+#define EP_AP_MASK_VALUE        320  //4  bytes xxx.xxx.xxx.xxx
+#define EP_AP_GATEWAY_VALUE     324  //4  bytes xxx.xxx.xxx.xxx
 #define EP_AP_IP_MODE           329   //1 byte = flag
 #define EP_AP_PHY_MODE          330  //1 byte = flag
 #define EP_SD_SPEED_DIV         331  //1 byte = flag
 #define ESP_NOTIFICATION_TOKEN1 332    //64 bytes 63+1 = string  ; warning does not support multibyte char like chinese
 #define ESP_NOTIFICATION_TOKEN2 396    //64 bytes 63+1 = string  ; warning does not support multibyte char like chinese
-#define EP_DHT_TYPE     460 //1  bytes = flag
-#define EP_TARGET_FW        461 //1  bytes = flag
-#define EP_TIMEZONE         462//1  bytes = flag
-#define EP_TIME_ISDST       463//1  bytes = flag
-#define EP_TIME_SERVER1 464//128 bytes 127+1 = string  ; warning does not support multibyte char like chinese  
-#define EP_TIME_SERVER2  593 //128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
-#define EP_TIME_SERVER3  722 //128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
-#define EP_IS_DIRECT_SD   850//1  bytes = flag
-#define EP_PRIMARY_SD   851//1  bytes = flag
-#define EP_SECONDARY_SD   852//1  bytes = flag
-#define EP_DIRECT_SD_CHECK   853//1  bytes = flag
+#define EP_DHT_TYPE             460 //1  bytes = flag
+#define EP_TARGET_FW            461 //1  bytes = flag
+#define EP_TIMEZONE             462//1  bytes = flag
+#define EP_TIME_ISDST           463//1  bytes = flag
+#define EP_TIME_SERVER1         464//128 bytes 127+1 = string  ; warning does not support multibyte char like chinese  
+#define EP_TIME_SERVER2         593 //128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
+#define EP_TIME_SERVER3         722 //128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
+#define EP_IS_DIRECT_SD         850//1  bytes = flag
+#define EP_PRIMARY_SD           851//1  bytes = flag
+#define EP_SECONDARY_SD         852//1  bytes = flag
+#define EP_DIRECT_SD_CHECK      853//1  bytes = flag
 #define EP_SD_CHECK_UPDATE_AT_BOOT   854//1  bytes = flag
 #define ESP_NOTIFICATION_SETTINGS 855//128 bytes 127+1 = string  ; warning does not support multibyte char like chinese
 
-#define EP_EEPROM_VERSION 1017// 6 bytes = ESP3D<V on one byte>
+#define EP_EEPROM_VERSION       1017// 6 bytes = ESP3D<V on one byte>
 
 #define LAST_EEPROM_ADDRESS 983
 
