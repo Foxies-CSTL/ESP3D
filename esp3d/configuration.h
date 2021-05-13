@@ -40,7 +40,7 @@
 //COMMUNICATION_PROTOCOL: to communicate with printer or TFT
 //RAW_SERIAL standard serial
 //MKS_SERIAL Mks protocol
-#define COMMUNICATION_PROTOCOL RAW_SERIAL //MKS_SERIAL
+#define COMMUNICATION_PROTOCOL RAW_SERIAL//MKS_SERIAL
 
 //AUTHENTICATION_FEATURE: protect pages by login password
 //#define AUTHENTICATION_FEATURE
@@ -140,7 +140,7 @@
 //ESP_NO_SD
 //ESP_DIRECT_SD
 //ESP_SHARED_SD
-//#define SD_DEVICE_CONNECTION ESP_NO_SD
+//#define SD_DEVICE_CONNECTION ESP_SHARED_SD
 
 //pin if reader has insert detection feature
 //let -1 or comment if none
